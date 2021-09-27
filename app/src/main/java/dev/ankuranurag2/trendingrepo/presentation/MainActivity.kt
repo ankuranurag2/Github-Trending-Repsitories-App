@@ -1,4 +1,4 @@
-package dev.ankuranurag2.trendingrepo
+package dev.ankuranurag2.trendingrepo.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -8,7 +8,7 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import dev.ankuranurag2.trendingrepo.ui.theme.TrendingRepoTheme
+import dev.ankuranurag2.trendingrepo.presentation.theme.TrendingRepoTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

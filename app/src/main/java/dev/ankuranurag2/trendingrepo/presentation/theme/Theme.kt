@@ -1,4 +1,4 @@
-package dev.ankuranurag2.trendingrepo.ui.theme
+package dev.ankuranurag2.trendingrepo.presentation.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
