@@ -1,6 +1,5 @@
 package dev.ankuranurag2.trendingrepo.data.remote
 
-import dev.ankuranurag2.trendingrepo.data.remote.RepoDto
 import retrofit2.http.GET
 
 interface GithubAPI {
