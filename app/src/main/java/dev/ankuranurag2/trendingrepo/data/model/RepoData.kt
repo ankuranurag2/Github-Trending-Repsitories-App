@@ -1,4 +1,4 @@
-package dev.ankuranurag2.trendingrepo.domain.model
+package dev.ankuranurag2.trendingrepo.data.model
 
 import com.google.gson.annotations.SerializedName
 
