@@ -1,4 +1,4 @@
-package dev.ankuranurag2.trendingrepo.presentation
+package dev.ankuranurag2.trendingrepo.presentation.trending
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
