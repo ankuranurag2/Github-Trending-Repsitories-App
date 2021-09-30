@@ -20,5 +20,5 @@ class GetTrendingRepoUseCase @Inject constructor(
         } catch (e: Exception) {
             emit(Resource.Error(e))
         }
-    }.flowOn(viewModelScope.coroutineContext)
+    }
 }
