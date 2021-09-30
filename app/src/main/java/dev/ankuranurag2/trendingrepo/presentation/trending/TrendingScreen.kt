@@ -1,5 +1,7 @@
 package dev.ankuranurag2.trendingrepo.presentation.trending
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -26,6 +28,7 @@ import dev.ankuranurag2.trendingrepo.utils.AppUtils
 import dev.ankuranurag2.trendingrepo.utils.Resource
 import kotlinx.coroutines.launch
 
+@ExperimentalAnimationApi
 @Composable
 fun TrendingScreen() {
     val viewModel: TrendingRepoVM = hiltViewModel()
@@ -62,6 +65,7 @@ fun TrendingScreen() {
     }
 }
 
+@ExperimentalAnimationApi
 @Composable
 fun RepoListItem(repoData: RepoData) {
     var isExpanded by rememberSaveable {
@@ -101,50 +105,56 @@ fun RepoListItem(repoData: RepoData) {
 
                 Text(text = repoData.name, style = MaterialTheme.typography.subtitle2)
 
-                if (isExpanded) {
-                    Spacer(modifier = Modifier.height(8.dp))
-
-                    Text(text = repoData.description, style = MaterialTheme.typography.subtitle1)
-
-                    Spacer(modifier = Modifier.height(8.dp))
-
-                    Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-                        Canvas(
-                            modifier = Modifier.size(8.dp),
-                            onDraw = {
-                                8.dp.toPx().let {
-                                    drawCircle(
-                                        color = AppUtils.getComposeColorFromHex(repoData.languageColor),
-                                        radius = it / 2f
-                                    )
-                                }
-                            }
-                        )
-                        Spacer(modifier = Modifier.size(8.dp))
-                        Text(text = repoData.language, style = MaterialTheme.typography.subtitle1)
-
-                        Spacer(modifier = Modifier.size(8.dp))
-
-                        Image(
-                            painter = painterResource(id = R.drawable.star_yellow_16),
-                            contentDescription = null,
-                            modifier = Modifier.size(16.dp)
-                        )
-                        Spacer(modifier = Modifier.size(4.dp))
-                        Text(text = repoData.stars.toString(), style = MaterialTheme.typography.subtitle1)
-
-                        Spacer(modifier = Modifier.size(8.dp))
-
-                        Image(
-                            painter = painterResource(id = R.drawable.fork_black_16),
-                            contentDescription = null,
-                            modifier = Modifier.size(16.dp)
-                        )
-                        Spacer(modifier = Modifier.size(4.dp))
-                        Text(text = repoData.forks.toString(), style = MaterialTheme.typography.subtitle1)
-                    }
+                Spacer(modifier = Modifier.height(8.dp))
+                AnimatedVisibility(visible = isExpanded, modifier = Modifier.fillMaxWidth()) {
+                    ExpandedItem(repoData = repoData)
                 }
             }
+        }
+    }
+}
+
+@Composable
+fun ExpandedItem(repoData: RepoData) {
+    Column {
+        Text(text = repoData.description, style = MaterialTheme.typography.subtitle1)
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+            Canvas(
+                modifier = Modifier.size(8.dp),
+                onDraw = {
+                    8.dp.toPx().let {
+                        drawCircle(
+                            color = AppUtils.getComposeColorFromHex(repoData.languageColor),
+                            radius = it / 2f
+                        )
+                    }
+                }
+            )
+            Spacer(modifier = Modifier.size(8.dp))
+            Text(text = repoData.language, style = MaterialTheme.typography.subtitle1)
+
+            Spacer(modifier = Modifier.size(8.dp))
+
+            Image(
+                painter = painterResource(id = R.drawable.star_yellow_16),
+                contentDescription = null,
+                modifier = Modifier.size(16.dp)
+            )
+            Spacer(modifier = Modifier.size(4.dp))
+            Text(text = repoData.stars.toString(), style = MaterialTheme.typography.subtitle1)
+
+            Spacer(modifier = Modifier.size(8.dp))
+
+            Image(
+                painter = painterResource(id = R.drawable.fork_black_16),
+                contentDescription = null,
+                modifier = Modifier.size(16.dp)
+            )
+            Spacer(modifier = Modifier.size(4.dp))
+            Text(text = repoData.forks.toString(), style = MaterialTheme.typography.subtitle1)
         }
     }
 }
