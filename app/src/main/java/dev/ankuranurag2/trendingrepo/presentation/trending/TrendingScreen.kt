@@ -8,10 +8,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.Divider
-import androidx.compose.material.Text
-import androidx.compose.material.rememberScaffoldState
+import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
@@ -48,7 +45,7 @@ fun TrendingScreen() {
                         items(it) { repoData ->
                             RepoListItem(repoData)
                             Divider(
-                                color = Color.Gray,
+                                color = Color.LightGray,
                                 thickness = 1.dp
                             )
                         }
@@ -81,39 +78,41 @@ fun RepoListItem(repoData: RepoData) {
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.Start,
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.Top
         ) {
             Image(
                 painter = rememberImagePainter(repoData.avatar),
                 contentDescription = null,
                 modifier = Modifier
-                    .size(64.dp)
+                    .size(48.dp)
                     .clip(CircleShape)
             )
+
+            Spacer(modifier = Modifier.size(16.dp))
 
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(1f)
             ) {
-                Text(text = repoData.author, fontSize = 12.sp)
+                Text(text = repoData.author, style = MaterialTheme.typography.subtitle1)
 
                 Spacer(modifier = Modifier.height(6.dp))
 
-                Text(text = repoData.name, fontSize = 15.sp)
+                Text(text = repoData.name, style = MaterialTheme.typography.subtitle2)
 
                 if (isExpanded) {
                     Spacer(modifier = Modifier.height(8.dp))
 
-                    Text(text = repoData.description, fontSize = 15.sp)
+                    Text(text = repoData.description, style = MaterialTheme.typography.subtitle1)
 
                     Spacer(modifier = Modifier.height(8.dp))
 
-                    Row(Modifier.fillMaxWidth()) {
+                    Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                         Canvas(
-                            modifier = Modifier.size(16.dp),
+                            modifier = Modifier.size(8.dp),
                             onDraw = {
-                                16.dp.toPx().let {
+                                8.dp.toPx().let {
                                     drawCircle(
                                         color = AppUtils.getComposeColorFromHex(repoData.languageColor),
                                         radius = it / 2f
@@ -121,28 +120,28 @@ fun RepoListItem(repoData: RepoData) {
                                 }
                             }
                         )
-                        Spacer(modifier = Modifier.size(4.dp))
-                        Text(text = repoData.language)
+                        Spacer(modifier = Modifier.size(8.dp))
+                        Text(text = repoData.language, style = MaterialTheme.typography.subtitle1)
 
                         Spacer(modifier = Modifier.size(8.dp))
 
                         Image(
-                            painter = painterResource(id = R.drawable.ic_launcher_foreground),
+                            painter = painterResource(id = R.drawable.star_yellow_16),
                             contentDescription = null,
                             modifier = Modifier.size(16.dp)
                         )
                         Spacer(modifier = Modifier.size(4.dp))
-                        Text(text = repoData.stars.toString())
+                        Text(text = repoData.stars.toString(), style = MaterialTheme.typography.subtitle1)
 
                         Spacer(modifier = Modifier.size(8.dp))
 
                         Image(
-                            painter = painterResource(id = R.drawable.ic_launcher_foreground),
+                            painter = painterResource(id = R.drawable.fork_black_16),
                             contentDescription = null,
                             modifier = Modifier.size(16.dp)
                         )
                         Spacer(modifier = Modifier.size(4.dp))
-                        Text(text = repoData.forks.toString())
+                        Text(text = repoData.forks.toString(), style = MaterialTheme.typography.subtitle1)
                     }
                 }
             }
