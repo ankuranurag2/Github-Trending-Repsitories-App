@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">TrendingRepo</string>
+    <string name="loading_error">Failed to load fresh data</string>
 </resources>
