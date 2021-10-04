@@ -80,10 +80,16 @@ fun TrendingScreenContent(
                         expanded = showMenu,
                         onDismissRequest = { showMenu = false }
                     ) {
-                        DropdownMenuItem(onClick = { onSortRequest(SortBy.STAR) }) {
+                        DropdownMenuItem(onClick = {
+                            showMenu = !showMenu
+                            onSortRequest(SortBy.STAR)
+                        }) {
                             Text(text = "Sort by stars")
                         }
-                        DropdownMenuItem(onClick = { onSortRequest(SortBy.NAME) }) {
+                        DropdownMenuItem(onClick = {
+                            showMenu = !showMenu
+                            onSortRequest(SortBy.NAME)
+                        }) {
                             Text(text = "Sort by name")
                         }
                     }
@@ -98,7 +104,9 @@ fun TrendingScreenContent(
                     state = rememberSwipeRefreshState(isRefreshing = uiState.loading),
                     onRefresh = onRefresh,
                     content = {
-                        Box(modifier = Modifier.fillMaxSize().background(color = Color.White)) {
+                        Box(modifier = Modifier
+                            .fillMaxSize()
+                            .background(color = Color.White)) {
                             if (uiState.repoList.isEmpty() && uiState.errorMsgId != null) {
                                 ErrorScreen(onRefresh)
                             } else {
